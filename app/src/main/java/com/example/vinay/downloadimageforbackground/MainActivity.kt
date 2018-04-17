@@ -1,9 +1,11 @@
 package com.example.vinay.downloadimageforbackground
 
 import android.graphics.drawable.BitmapDrawable
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.vinaylogics.imageurltodrawable.ImageDownloader
+import com.vinaylogics.urltodrwable.UrlDownloadApplication
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         helloTextView.setOnClickListener({
-            val imageDownloader = ImageDownloader(this, object : ImageDownloader.ImageCallback {
+            val imageDownloader = ImageDownloader(this, "https://i.imgur.com/aGfNKiQ.jpg", "downloadable.jpg" ,object : ImageDownloader.ImageCallback {
                 override fun onSuccessImage(drawable: BitmapDrawable) {
                     mainLayout.background = drawable
                 }
@@ -22,7 +24,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
             })
-            DownloadApplication.getAppcontext().scheduler.execute(imageDownloader)
+            UrlDownloadApplication.getAppcontext().scheduler.execute(imageDownloader)
         })
     }
 }
